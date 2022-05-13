@@ -1,0 +1,85 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    </script>
+        <link rel="stylesheet" href="{{url_for('.static', filename='table.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{ name }}</span><span class="text-black-20">{{ form.email }}</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Profile Settings</h4>
+            </div>
+            <form class="form-signin" method="POST" action="/updateprofile">
+                {{ wtf.form_field(form.name) }}
+                {{ wtf.form_field(form.surname) }}
+                {{ wtf.form_field(form.email) }}
+                {{ wtf.form_field(form.cname) }}
+                {{ wtf.form_field(form.salary) }}
+                {{ wtf.form_field(form.phone) }}
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+            </form>
+        <br>
+
+{% for category,message in get_flashed_messages(True) %}
+    <div class="{{category}}">{{message}}</div>
+    {% endfor %}
+
+            {%  if doctor==true %}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Add new specialization</h4>
+            </div>
+                <form class="form-signin" method="POST" action="/approve_specialization">
+                    {{ wtf.form_field(form2.id) }}
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Add specialization</button>
+                </form>
+            {% endif %}
+                <button class="btn btn-lg btn-primary btn-block" style="background: red"  type="submit">Delete account</button>
+
+        </div>
+        <div class="col-md-4">
+                <div class="d-flex justify-content-between align-items-center experience"><span style="font-size: 23px; font-weight: bold">Account status</span></div><br>
+                <div class="col-md-12"><label class="labels">Public servant: </label></div>
+                {%  if servant==true %}
+                <span class="border px-3 p-1 add-experience" style="background: dodgerblue; color: white"><i class="fa fa-plus"></i>&nbsp;You are public servant</span><br>
+                {% else %}
+                <span class="border px-3 p-1 add-experience" style="background: firebrick; color: white"><i class="fa fa-plus"></i>&nbsp;You are not public servant</span><br>
+                {% endif %}
+        <br><div class="col-md-12"><label class="labels">Doctor: </label></div>
+                {%  if doctor==true %}
+                <span class="border px-3 p-1 add-experience" style="background: dodgerblue; color: white"><i class="fa fa-plus"></i>&nbsp;You are doctor</span><br>
+                   <br> <label>Specializations: </label> <br>
+                    {% for q in specs %}
+                <div class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;{{ q }}</div><br>
+                {% endfor %}
+                {% else %}
+                <span class="border px-3 p-1 add-experience" style="background: firebrick; color: white"><i class="fa fa-plus"></i>&nbsp;You are not doctor</span></div><br>
+                {% endif %}
+                <br>
+                <br>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+
+

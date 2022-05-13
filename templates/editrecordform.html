@@ -1,0 +1,29 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Sign Up
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <form class="form-signin" method="POST" action="/updaterecord">
+    <h2 class="form-signin-heading">Edit record</h2>
+      {{ wtf.form_field(form.email, readonly="readonly") }}
+      {{ wtf.form_field(form.cname, style="pointer-events: none;
+        touch-action: none") }}
+    {{ wtf.form_field(form.disease_code, style="pointer-events: none;
+        touch-action: none") }}
+    {{ wtf.form_field(form.total_deathcount) }}
+    {{ wtf.form_field(form.total_patients) }}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Add record</button>
+  </form>
+
+</div> <!-- /container -->
+{% endblock %}

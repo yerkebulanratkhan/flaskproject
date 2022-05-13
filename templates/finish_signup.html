@@ -1,0 +1,30 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Sign Up
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+    function a() {
+      document.getElementById("hide").style.display = "none";
+  }
+  </script>
+    <body onload="a()"></body>>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <form class="form-signin" method="POST" action="/updatestatus">
+    <h2 class="form-signin-heading">Sign Up</h2>
+    {{ wtf.form_field(form.isdoctor) }}
+    {{ wtf.form_field(form.degree) }}
+    {{ wtf.form_field(form.ispublicservant) }}
+    {{ wtf.form_field(form.department) }}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Update status</button>
+  </form>
+</div> <!-- /container -->
+{% endblock %}

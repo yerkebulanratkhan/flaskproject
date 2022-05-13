@@ -1,0 +1,56 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+    <link rel="stylesheet" href="{{url_for('.static', filename='starter-template.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static', filename='menu.css')}}">
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static', filename='table.css')}}">
+        <link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+
+
+{% endblock %}
+{% block content %}
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li ><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+            <li><a href="#">{{ current_user.email }}</a></li>
+            <li><a href="{{ url_for('profile')}}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div>
+    <h1 >Profile Settings</h1>
+    <form class="form-signin" method="POST" action="/updateprofile">
+                {{ wtf.form_field(form.name) }}
+                {{ wtf.form_field(form.surname) }}
+                {{ wtf.form_field(form.email, readonly="readonly") }}
+                {{ wtf.form_field(form.cname) }}
+                {{ wtf.form_field(form.salary) }}
+                {{ wtf.form_field(form.phone) }}
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+            </form>
+    </div>
+{% endblock %}
